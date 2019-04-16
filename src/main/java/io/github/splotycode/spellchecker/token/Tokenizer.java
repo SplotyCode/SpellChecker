@@ -13,10 +13,12 @@ public class Tokenizer {
         LinkedList<Token> queue = new LinkedList<>();
         char lastChar = Character.MIN_VALUE;
         Token lastToken = null;
+        int i = 0;
         for (char ch : input.toCharArray()) {
             for (ITokenizerVisitor visitor : visitors) visitor.visitChar(lastChar, ch, collector);
-            Token token = new Token(TokenTypes.TYPES.get(Character.toLowerCase(ch)), ch + "");
+            Token token = new Token(TokenTypes.TYPES.get(Character.toLowerCase(ch)), ch + "", i, i);
             for (ITokenizerVisitor visitor : visitors) visitor.visitToken(lastToken, token, collector);
+            i++;
             lastChar = ch;
             lastToken = token;
         }
