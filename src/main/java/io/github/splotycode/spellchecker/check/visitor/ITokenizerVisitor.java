@@ -7,6 +7,6 @@ public interface ITokenizerVisitor extends Visitor {
 
     void visitChar(char lastChar, char character, ProblemCollector collector);
 
-    void visitToken(Token token, ProblemCollector collector);
+    void visitToken(Token lastToken, Token token, ProblemCollector collector);
 
 }

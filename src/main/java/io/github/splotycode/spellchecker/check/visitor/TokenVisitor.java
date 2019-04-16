@@ -11,7 +11,7 @@ public class TokenVisitor implements ITokenizerVisitor {
     }
 
     @Override
-    public void visitToken(Token token, ProblemCollector collector) {
+    public void visitToken(Token lastToken, Token token, ProblemCollector collector) {
 
     }
 }
