@@ -7,7 +7,7 @@ public class EnglishLanguage extends Language {
 
     public EnglishLanguage() {
         checks.add(new DoubleWhitespaceCheck());
-        checks.add(new DoubleWordCheck());
+        checks.add(new DoubleWordCheck("will", "may", "tse", "sapiens", "blah", "had", "that", "can"));
         checks.add(new SentenceCapitalisationCheck());
         checks.add(new WhitespaceAfterNewLineCheck());
         checks.add(new WhitespacingCheck());
