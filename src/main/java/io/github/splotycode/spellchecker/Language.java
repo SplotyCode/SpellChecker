@@ -8,7 +8,9 @@ import java.util.ArrayList;
 @Getter
 public abstract class Language {
 
-    private ArrayList<Check> checks = new ArrayList<>();
+    public abstract boolean isVocal(char character);
+
+    protected ArrayList<Check> checks = new ArrayList<>();
 
     public String getDisplayName() {
         return getClass().getSimpleName();
