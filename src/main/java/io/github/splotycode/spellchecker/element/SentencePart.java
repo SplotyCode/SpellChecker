@@ -6,6 +6,14 @@ public class SentencePart extends Element<Word, Sentence> {
         super(start, end, root);
     }
 
+    public Word getWord(int index) {
+        return elements.get(index);
+    }
+
+    public Word firstWord() {
+        return elements.get(0);
+    }
+
     public Sentence getSentence() {
         return root;
     }
