@@ -2,6 +2,11 @@ package io.github.splotycode.spellchecker.english;
 
 import io.github.splotycode.spellchecker.Language;
 import io.github.splotycode.spellchecker.check.defaults.*;
+import io.github.splotycode.spellchecker.element.WordFactory;
+import io.github.splotycode.spellchecker.english.check.AnOrACheck;
+import io.github.splotycode.spellchecker.english.check.ContractionsCheck;
+import io.github.splotycode.spellchecker.english.check.EnglishCapitalisationCheck;
+import io.github.splotycode.spellchecker.english.check.EnglishTypoCheck;
 
 public class EnglishLanguage extends Language {
 
@@ -16,6 +21,8 @@ public class EnglishLanguage extends Language {
 
         checks.add(new AnOrACheck());
         checks.add(new ContractionsCheck());
+        checks.add(new EnglishTypoCheck());
+        checks.add(new EnglishCapitalisationCheck());
     }
 
     @Override
