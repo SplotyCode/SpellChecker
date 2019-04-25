@@ -6,11 +6,11 @@ import io.github.splotycode.spellchecker.element.SentencePart;
 import io.github.splotycode.spellchecker.element.Text;
 import io.github.splotycode.spellchecker.element.Word;
 
-public interface IElementVisitor extends Visitor {
+public interface IElementVisitor<W extends Word> extends Visitor {
 
     void visitText(ProblemCollector collector, Text text);
     void visitSentence(ProblemCollector collector, Sentence sentence);
     void visitSentencePart(ProblemCollector collector, SentencePart text);
-    void visitWord(ProblemCollector collector, Word word);
+    void visitWord(ProblemCollector collector, W word);
 
 }

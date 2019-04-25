@@ -6,7 +6,7 @@ import io.github.splotycode.spellchecker.element.SentencePart;
 import io.github.splotycode.spellchecker.element.Text;
 import io.github.splotycode.spellchecker.element.Word;
 
-public class ElementVisitor implements IElementVisitor {
+public class ElementVisitor<W extends Word> implements IElementVisitor<W> {
     @Override
     public void visitText(ProblemCollector collector, Text text) {
 
@@ -23,7 +23,7 @@ public class ElementVisitor implements IElementVisitor {
     }
 
     @Override
-    public void visitWord(ProblemCollector collector, Word word) {
+    public void visitWord(ProblemCollector collector, W word) {
 
     }
 }

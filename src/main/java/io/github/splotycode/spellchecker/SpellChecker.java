@@ -24,7 +24,7 @@ public class SpellChecker {
             }
         }
         ProblemCollector collector = new ProblemCollector();
-        tokenizer.parseToText(input, tokenVisitors, elementVisitors, collector);
+        tokenizer.parseToText(input, language.wordFactory(), tokenVisitors, elementVisitors, collector);
         return collector.getProblems();
     }
 

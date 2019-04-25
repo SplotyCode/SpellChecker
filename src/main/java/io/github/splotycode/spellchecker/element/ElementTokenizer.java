@@ -8,17 +8,16 @@ import io.github.splotycode.spellchecker.token.Tokenizer;
 import io.github.splotycode.spellchecker.token.types.*;
 
 import java.util.Collection;
-import java.util.Deque;
 
 public class ElementTokenizer extends Tokenizer {
 
-    public Text parseToText(String input, Collection<ITokenizerVisitor> tokenVisitors, Collection<IElementVisitor> elementVisitors, ProblemCollector collector) {
+    public Text parseToText(String input, WordFactory factory, Collection<ITokenizerVisitor> tokenVisitors, Collection<IElementVisitor> elementVisitors, ProblemCollector collector) {
         Collection<Token> tokens = parse(input, tokenVisitors, collector);
 
         Text text = new Text(0, input.length(), null);
         Sentence sentence = new Sentence(0, -1, text);
         SentencePart part = new SentencePart(0, -1, sentence);
-        Word word = new Word(0, -1, part);
+        Word word = factory.createWord(0, -1, part);
 
         text.addElement(sentence);
         sentence.addElement(part);
@@ -32,7 +31,7 @@ public class ElementTokenizer extends Tokenizer {
             } else if (token.getType() instanceof WhitespaceTokenType) {
                 if (word.getElements().size() != 0) {
                     word.setEnd(position);
-                    part.addElement(word = new Word(position, -1, part));
+                    part.addElement(word = factory.createWord(position, -1, part));
                 }
             } else if (token.getType() instanceof SentenceTokenType) {
                 if (token.getType() == TokenTypes.COMMA) {
@@ -40,7 +39,7 @@ public class ElementTokenizer extends Tokenizer {
                     sentence.addElement(part = new SentencePart(position, -1, sentence));
 
                     word.setEnd(position);
-                    part.addElement(word = new Word(position, -1, part));
+                    part.addElement(word = factory.createWord(position, -1, part));
                 } else {
                     sentence.setEnd(position);
                     text.addElement(sentence = new Sentence(position, -1, text));
@@ -49,7 +48,7 @@ public class ElementTokenizer extends Tokenizer {
                     sentence.addElement(part = new SentencePart(position, -1, sentence));
                     
                     word.setEnd(position);
-                    part.addElement(word = new Word(position, -1, part));
+                    part.addElement(word = factory.createWord(position, -1, part));
                 }
             }
             /* TODO: tokens might be larger then one char */
