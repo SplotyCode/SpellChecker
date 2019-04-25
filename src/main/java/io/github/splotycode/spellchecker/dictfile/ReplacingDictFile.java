@@ -7,23 +7,20 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ReplaceingDirctFile implements TransformableDict {
+public class ReplacingDictFile extends AbstractDict implements TransformableDict {
 
     private Map<String, String> map = new HashMap<>();
 
-    private final Logger logger = Logger.getInstance(getClass());
-
-    public ReplaceingDirctFile(String resource) {
-        try {
-            for (String line : IOUtil.resourceToText("/" + resource).split("\n")) {
-                if (line.startsWith("#")) continue;
-                String[] split = line.split(" ");
-                if (split.length != 2) continue;
-                map.put(split[0], split[1]);
-            }
-        } catch (IOException e) {
-            logger.warn("Could not read resource: " + resource, e);
+    @Override
+    void onLine(String line) {
+        String[] split = line.split(" ");
+        if (split.length == 2) {
+            map.put(split[0], split[1]);
         }
+    }
+
+    public ReplacingDictFile(String resource, LineSeparator lineSeparator) {
+        loadDict(resource, lineSeparator);
     }
 
     @Override
