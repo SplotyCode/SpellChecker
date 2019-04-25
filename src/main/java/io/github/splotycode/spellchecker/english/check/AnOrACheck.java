@@ -1,4 +1,4 @@
-package io.github.splotycode.spellchecker.english;
+package io.github.splotycode.spellchecker.english.check;
 
 import io.github.splotycode.mosaik.util.AlmostBoolean;
 import io.github.splotycode.spellchecker.check.Check;
@@ -6,14 +6,15 @@ import io.github.splotycode.spellchecker.check.ProblemCollector;
 import io.github.splotycode.spellchecker.check.visitor.ElementVisitor;
 import io.github.splotycode.spellchecker.check.visitor.Visitor;
 import io.github.splotycode.spellchecker.dictfile.CaseDictFile;
+import io.github.splotycode.spellchecker.dictfile.LineSeparator;
 import io.github.splotycode.spellchecker.element.Word;
 
 import static io.github.splotycode.mosaik.util.AlmostBoolean.*;
 
 public class AnOrACheck extends Check {
 
-    private CaseDictFile aDict = new CaseDictFile("en/a.txt");
-    private CaseDictFile anDict = new CaseDictFile("en/an.txt");
+    private CaseDictFile aDict = new CaseDictFile("en/a.txt", LineSeparator.UNIX);
+    private CaseDictFile anDict = new CaseDictFile("en/an.txt", LineSeparator.UNIX);
 
     @Override
     public Visitor visitor() {
