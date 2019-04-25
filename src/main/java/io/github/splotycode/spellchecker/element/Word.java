@@ -1,6 +1,7 @@
 package io.github.splotycode.spellchecker.element;
 
 import io.github.splotycode.mosaik.util.AlmostBoolean;
+import io.github.splotycode.spellchecker.util.CapitalisationUtil;
 
 public class Word extends Element<Letter, SentencePart> {
 
@@ -14,6 +15,20 @@ public class Word extends Element<Letter, SentencePart> {
         return root;
     }
 
+    public boolean isNumber() {
+        for (Letter letter : elements) {
+            char ch = letter.asChar();
+            if (!Character.isDigit(ch) && ch != '.' && ch != ',') {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public Sentence getSentence() {
+        return root.root;
+    }
+
     public String asString() {
         return asString(AlmostBoolean.MAYBE);
     }
@@ -23,15 +38,7 @@ public class Word extends Element<Letter, SentencePart> {
         for (Letter token : elements) {
             builder.append(token.toString());
         }
-        String string = builder.toString();
-        switch (capitalisation) {
-            case YES:
-                return string.toUpperCase();
-            case NO:
-                return string.toLowerCase();
-            default:
-                return string;
-        }
+        return CapitalisationUtil.capitalize(builder.toString(), capitalisation);
     }
 
     public Letter firstLetter() {
